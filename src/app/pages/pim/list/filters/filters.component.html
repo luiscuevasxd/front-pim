@@ -1,0 +1,77 @@
+<div class="p-6">
+  <h1 class="font-medium text-color">Filter</h1>
+  <div class="py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-4 w-full">
+      <form
+        id="filterForm"
+        [formGroup]="filters"
+        class="flex items-center w-full"
+      >
+        <div class="mr-6 w-1/3">
+          <label class="block text-gray-600 text-sm font-medium">
+            Estado
+          </label>
+          <div class="border border-gray-300 rounded-md px-2 py-1">
+            <select
+              class="form-input outline-0 w-full"
+              formControlName="status"
+              (change)="changeFilter()"
+            >
+              <option value=""></option>
+              <option
+                activeClass="bg-gray-100"
+                selectedClass="font-bold"
+                *ngFor="let item of status"
+                [value]="item.id"
+              >
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="mr-6 w-1/3">
+          <label class="block text-gray-600 text-sm font-medium">
+            Categoría
+          </label>
+          <div class="border border-gray-300 rounded-md px-2 py-1">
+            <select
+              class="form-input outline-0 w-full"
+              formControlName="category"
+              (change)="changeFilter()"
+            >
+              <option value=""></option>
+              <option
+                activeClass="bg-gray-100"
+                selectedClass="font-bold"
+                *ngFor="let item of categories"
+                [value]="item.id"
+              >
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="mr-6 w-1/3">
+          <label class="block text-gray-600 text-sm font-medium"> Stock </label>
+          <div class="border border-gray-300 rounded-md px-2 py-1">
+            <select
+              class="form-input outline-0 w-full"
+              formControlName="typeStock"
+              (change)="changeFilter()"
+            >
+              <option value=""></option>
+              <option
+                activeClass="bg-gray-100"
+                selectedClass="font-bold"
+                *ngFor="let item of typeStocks"
+                [value]="item.id"
+              >
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

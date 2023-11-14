@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "PublicSans";
+  src: url("font/public-sans/PublicSans-VariableFont_wght.ttf");
+}
+body {
+  font-family: "PublicSans";
+  background-color: #f8f7fa;
+}
+
+tr th div p,
+tr td p {
+  color: #5d596c;
+}
+.font-public-sans {
+  font-family: "PublicSans";
+}
+.text-color {
+  color: #5d596c;
+}
+
+.subtext-color {
+  color: #a5a3ae;
+}
+.line-color {
+  border-color: #dbdade;
+}
+
+.border-color-page {
+  border-color: #7367f0;
+}
+
+.bg-color-page {
+  background-color: #7367f0;
+}

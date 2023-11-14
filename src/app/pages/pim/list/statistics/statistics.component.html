@@ -1,0 +1,102 @@
+<div class="py-4 flex items-center justify-between">
+  <div class="flex items-center w-full">
+    <div class="w-1/4 border-r border-gray-300">
+      <div class="flex justify-between px-6">
+        <div>
+          <h6 class="text-sm font-medium mb-2 text-color">
+            Productos Publicados
+          </h6>
+          <h2 class="text-xl font-semibold mb-2 text-color">
+            $ {{ this.statistics?.PUBLISH?.totalPrice ?? 0 }}
+          </h2>
+          <span class="text-sm font-medium mr-3 subtext-color"
+            >{{ this.statistics?.PUBLISH?.totalProduct ?? 0 }} productos</span
+          >
+          <span
+            class="text-xs bg-green-100 text-green-500 px-2 py-0.5 rounded font-semibold"
+          >
+            +5.7%</span
+          >
+        </div>
+        <div
+          class="w-8 h-8 bg-gray-200 rounded-md flex items-center justify-center"
+        >
+          <fa-icon class="text-base text-color" [icon]="faHouse"></fa-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-1/4 border-r border-gray-300">
+      <div class="flex justify-between px-6">
+        <div>
+          <h6 class="text-sm font-medium text-slate-500 mb-2">
+            Productos Programados
+          </h6>
+          <h2 class="text-xl font-semibold text-slate-600 mb-2">
+            $ {{ this.statistics?.SCHEDULED?.totalPrice ?? 0 }}
+          </h2>
+          <span class="text-sm text-slate-400 mr-3"
+            >{{ this.statistics?.SCHEDULED?.totalProduct ?? 0 }} productos</span
+          >
+          <span
+            class="text-xs bg-green-100 text-green-500 px-2 py-0.5 rounded font-semibold"
+          >
+            +12.4%</span
+          >
+        </div>
+        <div
+          class="w-8 h-8 bg-gray-200 rounded-md flex items-center justify-center"
+        >
+          <fa-icon class="text-base text-color" [icon]="faLaptop"></fa-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-1/4 border-r border-gray-300">
+      <div class="flex justify-between px-6">
+        <div>
+          <h6 class="text-sm font-medium text-slate-500 mb-2">
+            Productos Inactivos
+          </h6>
+          <h2 class="text-xl font-semibold text-slate-600 mb-2">
+            $ {{ this.statistics?.INACTIVE?.totalPrice ?? 0 }}
+          </h2>
+          <span class="text-sm text-slate-400 mr-3">
+            {{ this.statistics?.INACTIVE?.totalProduct ?? 0 }} productos
+          </span>
+        </div>
+        <div
+          class="w-8 h-8 bg-gray-200 rounded-md flex items-center justify-center"
+        >
+          <fa-icon class="text-base text-color" [icon]="faGift"></fa-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-1/4">
+      <div class="flex justify-between px-6">
+        <div>
+          <h6 class="text-sm font-medium text-slate-500 mb-2">
+            Productos con Stock
+          </h6>
+          <h2 class="text-xl font-semibold text-slate-600 mb-2">
+            Qty. {{ this.statistics?.IN_STOCK?.totalStock ?? 0 }}
+          </h2>
+          <span class="text-sm text-slate-400 mr-3"
+            >{{ this.statistics?.IN_STOCK?.totalProduct ?? 0 }} productos</span
+          >
+          <span
+            class="text-xs bg-red-100 text-red-500 px-2 py-0.5 rounded font-semibold"
+          >
+            -3.5%</span
+          >
+        </div>
+        <div
+          class="w-8 h-8 bg-gray-200 rounded-md flex items-center justify-center"
+        >
+          <fa-icon class="text-base text-color" [icon]="faWallet"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

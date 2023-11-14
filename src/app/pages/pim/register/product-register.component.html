@@ -1,0 +1,137 @@
+<div
+  *ngIf="showModal"
+  class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 mw-500"
+>
+  <div class="bg-white p-6 rounded-lg shadow-md min-w-[500px]">
+    <h2 class="text-2xl font-semibold mb-4">Registrar Producto</h2>
+    <form [formGroup]="formData" (submit)="onSubmit()">
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">Nombre</label>
+        <input
+          type="text"
+          class="form-input outline-0 w-full"
+          formControlName="name"
+          name="name"
+          required
+          placeholder="Producto"
+        />
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">SKU</label>
+        <input
+          type="text"
+          class="form-input outline-0 w-full"
+          formControlName="sku"
+          name="sku"
+          required
+          placeholder="ACB123"
+        />
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">
+          Url Imagen
+        </label>
+        <input
+          type="text"
+          class="form-input outline-0 w-full"
+          formControlName="image"
+          name="image"
+          required
+          placeholder="ACB123"
+        />
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">
+          Categoría
+        </label>
+        <select class="form-input outline-0 w-full" formControlName="category">
+          <option value=""></option>
+          <option
+            activeClass="bg-gray-100"
+            selectedClass="font-bold"
+            *ngFor="let item of categories"
+            [value]="item.id"
+          >
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">
+          Descripción
+        </label>
+        <textarea
+          class="form-textarea w-full outline-0"
+          formControlName="description"
+          name="description"
+          rows="4"
+          required
+          placeholder="Esto es una descripción"
+        ></textarea>
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">Precio</label>
+        <input
+          type="number"
+          class="form-input outline-0 w-full"
+          formControlName="price"
+          name="price"
+          required
+          placeholder="1200"
+        />
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">Stock</label>
+        <input
+          type="number"
+          class="form-input outline-0 w-full"
+          formControlName="stock"
+          name="stock"
+          required
+          placeholder="20"
+        />
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium">
+          Tipo de stock
+        </label>
+        <select class="form-input outline-0 w-full" formControlName="typeStock">
+          <option value=""></option>
+          <option
+            activeClass="bg-gray-100"
+            selectedClass="font-bold"
+            *ngFor="let item of typeStocks"
+            [value]="item.id"
+          >
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-4 border-b-2">
+        <label class="block text-gray-600 text-sm font-medium"> Estado </label>
+        <select class="form-input outline-0 w-full" formControlName="status">
+          <option value=""></option>
+          <option
+            activeClass="bg-gray-100"
+            selectedClass="font-bold"
+            *ngFor="let item of status"
+            [value]="item.id"
+          >
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="text-right">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">
+          Guardar
+        </button>
+        <button
+          (click)="handleCloseModal()"
+          class="bg-gray-300 text-gray-700 px-4 py-2 rounded ml-2"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

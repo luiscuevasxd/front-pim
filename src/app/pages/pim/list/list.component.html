@@ -1,0 +1,227 @@
+<app-product-register
+  [showModal]="showModalProduct"
+  (onCloseModal)="handleProductPopup(false)"
+  (getAllProducts)="getAllProducts()"
+  [productId]="productId"
+></app-product-register>
+
+<div class="md:px-10 lg:px-32 xl:px-64 2xl:px-90 w-full">
+  <div class="bg-white shadow-lg rounded-md mt-8 mb-6">
+    <app-statistics [statistics]="statistics"></app-statistics>
+  </div>
+  <div class="bg-white shadow-lg rounded-md my-3">
+    <app-filters (onFilter)="getAllProducts($event)"></app-filters>
+    <div class="border-t border-gray-300">
+      <div class="py-5 px-6 flex items-center justify-between">
+        <div class="flex items-center w-full">
+          <div class="w-2/3">
+            <input
+              type="text"
+              formControlName="search"
+              class="border border-gray-300 rounded-md px-2 py-1 mr-6 w-1/3 focus:outline-none focus:border-violet-600 transition-colors"
+              placeholder="Search product"
+              (keydown.enter)="searchProducts($event)"
+            />
+          </div>
+          <div class="w-1/3 flex justify-end">
+            <button
+              (click)="handleProductPopup(true)"
+              class="bg-color-page text-white text-base px-5 py-1 rounded hover:bg-violet-700 transition-colors"
+            >
+              <fa-icon [icon]="faPlus"></fa-icon>
+              Add product
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-x-auto border-t border-gray-300">
+      <table class="w-full whitespace-nowrap">
+        <thead>
+          <tr class="focus:outline-none h-11 rounded">
+            <th class="focus:text-indigo-600 pl-4">
+              <div class="flex items-center">
+                <p class="text-xs font-medium leading-none ml-2">PRODUCT</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">CATEGORY</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">STOCK</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">SKU</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">PRICE</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">CANT. STOCK</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">STATUS</p>
+              </div>
+            </th>
+            <th class="focus:text-indigo-600">
+              <div class="flex items-center justify-flex-start ml-2">
+                <p class="text-xs font-medium leading-none">ACTION</p>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            tabindex="0"
+            class="focus:outline-none h-16 border-t border-gray-300 rounded"
+            *ngFor="let product of products"
+          >
+            <td class="pl-4 flex pt-2">
+              <div
+                style="border-radius: 4px"
+                class="w-8 h-6 border-gray-300 bg-gray-100 rounded-page pr-1"
+              >
+                <img alt="image" class="w-full h-full" [src]="product.image" />
+              </div>
+              <div>
+                <p class="text-sm leading-none ml-2">
+                  {{ product.name }}
+                </p>
+                <p class="text-xs subtext-color ml-2">
+                  {{ product.description }}
+                </p>
+              </div>
+            </td>
+            <td>
+              <span class="text-sm leading-none ml-2">
+                <span
+                  [class]="
+                    'w-8 h-8 mr-0.5 inline-flex items-center justify-center rounded-full ' +
+                    getInfoCategory(product.category)?.class
+                  "
+                >
+                  <fa-icon
+                    [icon]="getInfoCategory(product.category)?.icon"
+                  ></fa-icon>
+                </span>
+                {{ getInfoCategory(product.category)?.name }}
+              </span>
+            </td>
+            <td>
+              <div class="flex flex-col items-start justify-center ml-2">
+                <button
+                  *ngIf="product.typeStock === 'IN_STOCK'"
+                  class="w-8 h-4 bg-color-page rounded-full flex items-center"
+                  (click)="changeTypeStock(product._id)"
+                  title="Con stock"
+                >
+                  <div
+                    class="h-2.5 w-2.5 bg-white rounded-full translate-x-5"
+                  ></div>
+                </button>
+
+                <button
+                  *ngIf="product.typeStock === 'OUT_OF_STOCK'"
+                  class="w-8 h-4 border border-gray-300 rounded-full flex items-center"
+                  (click)="changeTypeStock(product._id)"
+                  title="Fuera de stock"
+                >
+                  <div
+                    class="h-2.5 w-2.5 bg-gray-300 rounded-full translate-x-0.5"
+                  ></div>
+                </button>
+              </div>
+            </td>
+            <td>
+              <p class="text-sm leading-none ml-2">
+                {{ product.sku }}
+              </p>
+            </td>
+            <td>
+              <p class="text-sm leading-none ml-2">
+                {{ product.price }}
+              </p>
+            </td>
+            <td>
+              <p class="text-sm leading-none ml-2">{{ product.stock }}</p>
+            </td>
+            <td>
+              <div class="flex flex-col items-start justify-between">
+                <p
+                  [class]="
+                    'text-xs px-3 py-0.5 rounded font-semibold ml-2 ' +
+                    getInfoStatus(product.status)?.class
+                  "
+                >
+                  {{ getInfoStatus(product.status)?.name }}
+                </p>
+              </div>
+            </td>
+
+            <td>
+              <div class="flex items-center justify-start ml-2">
+                <button
+                  class="text-sm leading-none text-gray-400 py-1 pr-3 focus:outline-none"
+                  (click)="handleEdit(product._id)"
+                  title="Editar"
+                >
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+
+                <button
+                  class="text-sm leading-none text-gray-400 py-1 pr-3 focus:outline-none"
+                  (click)="deleteProduct(product._id)"
+                  title="Eliminar"
+                >
+                  <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex items-center justify-center mt-8 pb-8">
+      <nav class="bg-white rounded-lg shadow-md p-4">
+        <ul class="flex space-x-2">
+          <li *ngIf="filters.page > 0">
+            <a
+              href="#"
+              class="px-3 py-2 text-gray-600 hover:text-blue-500"
+              (click)="handlePage(filters.page - 1)"
+              >Anterior</a
+            >
+          </li>
+          <li *ngFor="let item of totalPages(); let i = index">
+            <a
+              href="#"
+              [ngClass]="{ 'bg-color-page text-white': i === filters.page }"
+              class="px-3 py-2 rounded"
+              (click)="handlePage(i)"
+              >{{ i + 1 }}</a
+            >
+          </li>
+          <li *ngIf="filters.page < filters.count / filters.per_page - 1">
+            <a
+              href="#"
+              class="px-3 py-2 text-gray-600 hover:text-blue-500"
+              (click)="handlePage(filters.page + 1)"
+              >Siguiente</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

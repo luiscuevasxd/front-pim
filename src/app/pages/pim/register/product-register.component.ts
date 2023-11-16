@@ -66,6 +66,7 @@ export class ProductRegisterComponent {
   }
 
   createProduct() {
+    console.log('helloworld', this.formData.value);
     this.productApiService
       .create(this.formData.value as unknown as Omit<IProduct, 'id'>)
       .subscribe(() => {
